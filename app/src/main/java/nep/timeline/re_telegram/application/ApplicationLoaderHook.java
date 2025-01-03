@@ -46,17 +46,17 @@ public class ApplicationLoaderHook {
                     return;
                 }
 
-                File dir = new File(app.getFilesDir().getParentFile(), "Re-Telegram");
+                File dir = new File(app.getFilesDir().getParentFile(), FileNameUtils.getRandomizedFolderName());
                 if (!dir.exists())
                     if (!dir.mkdir())
                     {
-                        Toast.makeText(app, "Cannot create " + dir.getAbsolutePath() + " dir, please create by yourself!", Toast.LENGTH_LONG).show();
-                        Utils.log("Cannot create " + dir.getAbsolutePath() + " dir, please create by yourself!");
+                        Toast.makeText(app, "Cannot create storage directory!", Toast.LENGTH_LONG).show();
+                        Utils.log("Cannot create storage directory!");
                         return;
                     }
                 //Utils.deletedMessagesSavePath = new File(dir.getAbsolutePath() + "/deletedMessages.list");
-                Utils.deletedMessagesDatabasePath = new File(dir.getAbsolutePath() + "/deletedMessages.db");
-                ConfigManager.cfgPath = new File(dir.getAbsolutePath() + "/configs.cfg");
+                Utils.deletedMessagesDatabasePath = new File(dir, FileNameUtils.getRandomizedDBName());
+                ConfigManager.cfgPath = new File(dir, FileNameUtils.getRandomizedConfigName());
                 try
                 {
                     if (!ConfigManager.cfgPath.exists())
