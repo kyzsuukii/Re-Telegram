@@ -47,7 +47,7 @@ public class ApplicationLoaderHook {
                     return;
                 }
 
-                File dir = new File(app.getFilesDir().getParentFile(), FileNameUtils.getRandomizedFolderName());
+                File dir = new File(app.getFilesDir().getParentFile(), FileNameUtils.getRandomizedFolderName(app));
                 if (!dir.exists())
                     if (!dir.mkdir())
                     {
@@ -56,8 +56,8 @@ public class ApplicationLoaderHook {
                         return;
                     }
                 //Utils.deletedMessagesSavePath = new File(dir.getAbsolutePath() + "/deletedMessages.list");
-                Utils.deletedMessagesDatabasePath = new File(dir, FileNameUtils.getRandomizedDBName());
-                ConfigManager.cfgPath = new File(dir, FileNameUtils.getRandomizedConfigName());
+                Utils.deletedMessagesDatabasePath = new File(dir, FileNameUtils.getRandomizedDBName(app));
+                ConfigManager.cfgPath = new File(dir, FileNameUtils.getRandomizedConfigName(app));
                 try
                 {
                     if (!ConfigManager.cfgPath.exists())
